@@ -1,0 +1,1 @@
+﻿Simple, fast and offline unit converter.

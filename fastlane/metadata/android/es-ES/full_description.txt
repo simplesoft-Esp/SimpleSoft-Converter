@@ -1,0 +1,14 @@
+﻿SimpleSoft Converter es un conversor de unidades
+gratuito y de código abierto para Android.
+
+Diseñado siguiendo una filosofía de simplicidad,
+ofrece una interfaz limpia para realizar
+conversiones de unidades habituales.
+
+Características:
+- Interfaz sencilla y minimalista
+- Funcionamiento sin conexión
+- No requiere cuenta de usuario
+- Software libre y de código abierto
+
+Licencia: MIT

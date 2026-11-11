@@ -1,0 +1,1 @@
+﻿Initial release of SimpleSoft Converter for Android. Unit conversion with a simple interface and offline functionality.

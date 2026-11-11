@@ -1,0 +1,1 @@
+﻿Lanzamiento inicial de SimpleSoft Converter para Android. Conversión de unidades con una interfaz sencilla y funcionamiento sin conexión.
