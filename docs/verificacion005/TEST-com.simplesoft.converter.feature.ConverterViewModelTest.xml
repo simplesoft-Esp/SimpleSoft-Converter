@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.simplesoft.converter.feature.ConverterViewModelTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-10T09:22:17.727Z" hostname="d9c45714e066" time="0.482">
+  <properties/>
+  <testcase name="operationCountsOnceAcrossSeveralTriggers" classname="com.simplesoft.converter.feature.ConverterViewModelTest" time="0.404"/>
+  <testcase name="reopensPreferencesWithoutRestoringNumericInput" classname="com.simplesoft.converter.feature.ConverterViewModelTest" time="0.015"/>
+  <testcase name="exactSwapAndThemePreference" classname="com.simplesoft.converter.feature.ConverterViewModelTest" time="0.009"/>
+  <testcase name="favoritesOrderedAndExcludedFromFrequent" classname="com.simplesoft.converter.feature.ConverterViewModelTest" time="0.053"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

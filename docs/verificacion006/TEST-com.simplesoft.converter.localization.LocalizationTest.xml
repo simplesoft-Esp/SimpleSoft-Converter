@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.simplesoft.converter.localization.LocalizationTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-10T10:16:06.813Z" hostname="d9c45714e066" time="0.039">
+  <properties/>
+  <testcase name="allUnitsLocalizedWithoutNewFactors" classname="com.simplesoft.converter.localization.LocalizationTest" time="0.013"/>
+  <testcase name="completeResourceSets" classname="com.simplesoft.converter.localization.LocalizationTest" time="0.003"/>
+  <testcase name="changingLanguageDoesNotChangeNumber" classname="com.simplesoft.converter.localization.LocalizationTest" time="0.0"/>
+  <testcase name="decimalFormattingFollowsLanguage" classname="com.simplesoft.converter.localization.LocalizationTest" time="0.0"/>
+  <testcase name="officialLanguagesAndFallback" classname="com.simplesoft.converter.localization.LocalizationTest" time="0.001"/>
+  <testcase name="translatedFormatArgumentsMatch" classname="com.simplesoft.converter.localization.LocalizationTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

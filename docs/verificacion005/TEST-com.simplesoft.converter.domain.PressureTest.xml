@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.simplesoft.converter.domain.PressureTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-10T09:22:17.471Z" hostname="d9c45714e066" time="0.002">
+  <properties/>
+  <testcase name="familiesOnlyExposeImplementedCategories" classname="com.simplesoft.converter.domain.PressureTest" time="0.001"/>
+  <testcase name="barAndPrefixes" classname="com.simplesoft.converter.domain.PressureTest" time="0.0"/>
+  <testcase name="canonicalPressureSwap" classname="com.simplesoft.converter.domain.PressureTest" time="0.0"/>
+  <testcase name="psiDefinition" classname="com.simplesoft.converter.domain.PressureTest" time="0.001"/>
+  <testcase name="conventionalMercury" classname="com.simplesoft.converter.domain.PressureTest" time="0.0"/>
+  <testcase name="standardAtmosphere" classname="com.simplesoft.converter.domain.PressureTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

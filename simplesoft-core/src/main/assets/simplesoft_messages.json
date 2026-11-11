@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "1.1.0",
+  "language": "en",
+  "messages": [
+    {
+      "id": "help-not-interrupt",
+      "enabled": true,
+      "text": "SOFTWARE SHOULD HELP, NOT INTERRUPT."
+    },
+    {
+      "id": "attention",
+      "enabled": true,
+      "text": "YOUR ATTENTION IS NOT FOR SALE."
+    },
+    {
+      "id": "less-ads",
+      "enabled": true,
+      "text": "LESS ADS. MORE APP."
+    },
+    {
+      "id": "useful",
+      "enabled": true,
+      "text": "BUILT TO BE USEFUL."
+    },
+    {
+      "id": "no-popups",
+      "enabled": true,
+      "text": "NO POPUPS. NO NONSENSE."
+    },
+    {
+      "id": "help-not-interrupt",
+      "language": "es",
+      "enabled": true,
+      "text": "EL SOFTWARE DEBE AYUDAR, NO INTERRUMPIR."
+    },
+    {
+      "id": "attention",
+      "language": "es",
+      "enabled": true,
+      "text": "TU ATENCIÓN NO ESTÁ EN VENTA."
+    },
+    {
+      "id": "less-ads",
+      "language": "es",
+      "enabled": true,
+      "text": "MENOS ANUNCIOS. MÁS APLICACIÓN."
+    },
+    {
+      "id": "useful",
+      "language": "es",
+      "enabled": true,
+      "text": "CREADO PARA SER ÚTIL."
+    },
+    {
+      "id": "no-popups",
+      "language": "es",
+      "enabled": true,
+      "text": "SIN VENTANAS EMERGENTES. SIN COMPLICACIONES."
+    }
+  ]
+}

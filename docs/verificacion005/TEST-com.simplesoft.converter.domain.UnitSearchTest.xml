@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.simplesoft.converter.domain.UnitSearchTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-10T09:22:17.474Z" hostname="d9c45714e066" time="0.245">
+  <properties/>
+  <testcase name="symbols" classname="com.simplesoft.converter.domain.UnitSearchTest" time="0.198"/>
+  <testcase name="categoriesAreGroupedFromExistingCatalog" classname="com.simplesoft.converter.domain.UnitSearchTest" time="0.008"/>
+  <testcase name="englishNamesAndSynonyms" classname="com.simplesoft.converter.domain.UnitSearchTest" time="0.008"/>
+  <testcase name="noResults" classname="com.simplesoft.converter.domain.UnitSearchTest" time="0.01"/>
+  <testcase name="selectingUnitChangesCategoryAndSource" classname="com.simplesoft.converter.domain.UnitSearchTest" time="0.0"/>
+  <testcase name="spanishNamesAndAccents" classname="com.simplesoft.converter.domain.UnitSearchTest" time="0.019"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

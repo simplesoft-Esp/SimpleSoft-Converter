@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.simplesoft.converter.widget.PickerLayoutsTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-10T10:16:06.941Z" hostname="d9c45714e066" time="0.052">
+  <properties/>
+  <testcase name="sevenCategoriesInRequestedOrder" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.001"/>
+  <testcase name="geometryFitsAvailableHeightWithoutSmallerTouchTargets" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.013"/>
+  <testcase name="futureOverflowPagesOnlyWhenNeeded" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.0"/>
+  <testcase name="largeFontUsesNecessaryPaginationAndSurvivesCodec" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.0"/>
+  <testcase name="savedOldCategoryPageIsNormalizedWithoutLosingAmount" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.0"/>
+  <testcase name="unitsRetainFivePerPageAndNavigation" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.0"/>
+  <testcase name="sevenVisibleAtMinimumAndNormalSizes" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.001"/>
+  <testcase name="nextDoesNotCreateUnnecessaryCategoryPage" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.0"/>
+  <testcase name="categoryNamesRemainTranslated" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.025"/>
+  <testcase name="speedAndPressureDirectSelection" classname="com.simplesoft.converter.widget.PickerLayoutsTest" time="0.011"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

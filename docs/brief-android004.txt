@@ -1,0 +1,360 @@
+# SimpleSoft Converter — Desarrollo Android 004
+## Versión 0.2.0 · Identidad visual, navegación y componentes reutilizables
+
+### 1. Contexto del proyecto
+
+Estamos desarrollando **SimpleSoft**, una marca de aplicaciones Android pequeñas, rápidas, útiles y respetuosas con el usuario.
+
+Nuestra primera aplicación es **SimpleSoft Converter**, desarrollada en Kotlin, Jetpack Compose y Material 3.
+
+La versión anterior, Android 003, ya ha sido compilada correctamente en Windows, instalada en un teléfono Android real y probada inicialmente con éxito.
+
+**Carpeta principal de Google Drive:**
+https://drive.google.com/drive/folders/1vKjVg27bIXhKyQJVWoM-j42UWhde3BkJ
+
+**Proyecto Android 003:**
+https://drive.google.com/file/d/1kJDKdW5dAtbNnaaF44d93wfKP_h6nmYl/view
+
+**Especificaciones originales:**
+https://docs.google.com/document/d/1s4loyolqQkyfNXUi-dLX1dNyAuAJ4RyjYOZXDC2r1Jg/edit
+
+**Logotipo oficial de SimpleSoft:**
+https://drive.google.com/file/d/1E4C7nuw557T2WaNy7JJFL__ivmLlCavc/view
+
+Trabaja sobre el código de Android 003. No desarrolles una aplicación nueva desde cero ni elimines funcionalidades existentes.
+
+Mantén:
+- Package: `com.simplesoft.converter`
+- Minimum SDK: API 26
+- Kotlin + Jetpack Compose + Material 3
+- Funcionamiento sin conexión
+- Favoritos, frecuentes, preferencias y temas claro/oscuro
+- Conversiones precisas y resultados sin pérdida de precisión interna
+- Sin registros ni publicidad invasiva
+
+El objetivo es entregar **SimpleSoft Converter v0.2.0**.
+
+---
+
+### 2. Crear SimpleSoft Core: biblioteca reutilizable
+
+Quiero empezar a construir una biblioteca común llamada `SimpleSoft Core` para reutilizar componentes en futuras aplicaciones Android.
+
+Debe incluir inicialmente:
+
+- Sistema de mensajes de marca.
+- Componente visual del banner retro.
+- Contenedor preparado para futura publicidad discreta.
+- Recursos visuales y configuración compartida cuando tenga sentido.
+- Configuración para reducir o desactivar animaciones.
+
+Organiza estos elementos como un módulo Android reutilizable, preferiblemente una biblioteca independiente `:simplesoft-core`, integrada en el proyecto mediante Gradle.
+
+La biblioteca debe poder reutilizarse posteriormente en otras aplicaciones sin copiar y pegar código.
+
+**Importante:** todas las aplicaciones compartirán un único archivo fuente de mensajes dentro del repositorio o biblioteca. Cada APK incluirá su copia durante la compilación. No necesitamos servidores, sincronización por Internet ni almacenamiento compartido entre aplicaciones instaladas.
+
+Documenta cómo incorporar este módulo a una futura aplicación SimpleSoft.
+
+---
+
+### 3. Archivo independiente de mensajes
+
+Crear un archivo editable y reutilizable:
+
+`simplesoft_messages.json`
+
+Debe contener inicialmente estos mensajes:
+
+1. SOFTWARE SHOULD HELP, NOT INTERRUPT.
+2. YOUR ATTENTION IS NOT FOR SALE.
+3. LESS ADS. MORE APP.
+4. BUILT TO BE USEFUL.
+5. NO POPUPS. NO NONSENSE.
+
+Diseña una estructura JSON ampliable, con identificadores estables, idioma, versión y posibilidad de activar o desactivar mensajes.
+
+El banner debe leer los mensajes desde este archivo y alternarlos automáticamente.
+
+No incrustes los textos directamente en el código del componente visual.
+
+Permite añadir mensajes nuevos sin modificar el código Kotlin.
+
+Incluye validación y comportamiento seguro ante un archivo vacío, incorrecto o ausente.
+
+---
+
+### 4. Banner inferior estilo terminal LED retro
+
+Quiero un banner inspirado en los antiguos carteles electrónicos de matriz de puntos.
+
+**Diseño aprobado:**
+- Fondo negro o verde muy oscuro.
+- Texto verde fósforo.
+- Tipografía o representación visual matricial.
+- Desplazamiento horizontal de derecha a izquierda.
+- Mensajes rotativos procedentes del JSON compartido.
+- Estética retro, limpia y reconocible.
+- Animación fluida y ligera.
+
+El banner debe situarse en la parte inferior de la aplicación, sin tapar controles ni interferir con la navegación del sistema.
+
+Debe tener una altura reducida, adaptarse a diferentes pantallas y funcionar correctamente con temas claro y oscuro.
+
+No debe consumir recursos innecesarios.
+
+Respeta las preferencias de accesibilidad del sistema para reducir animaciones. Permite mostrar un mensaje estático cuando el movimiento esté desactivado.
+
+**Este espacio será el futuro lugar reservado para publicidad discreta.**
+
+Prepara una interfaz de componente que permita sustituir el contenido promocional propio por un anuncio en futuras versiones.
+
+No integres todavía AdMob ni ningún SDK publicitario. No añadas permisos de Internet, seguimiento ni recopilación de datos.
+
+---
+
+### 5. Crear un icono propio para SimpleSoft Converter
+
+Actualmente la aplicación no tiene un icono identificativo adecuado.
+
+Quiero un icono específico para el conversor, basado visualmente en la identidad oficial de SimpleSoft.
+
+Requisitos:
+
+- Utilizar el logotipo oficial como referencia de marca.
+- No modificar ni sustituir el archivo original del logotipo.
+- Diseñar un icono propio que represente la función de conversión.
+- Estética minimalista y monocromática.
+- Reconocible incluso a tamaño pequeño.
+- Sin texto diminuto ni detalles innecesarios.
+- Compatible con iconos adaptativos de Android.
+- Preparar foreground, background y variante monocromática cuando corresponda.
+- Generar los recursos Android necesarios.
+
+Puedes explorar una composición del monograma SimpleSoft con dos flechas de conversión, siempre que el resultado sea limpio y legible.
+
+Conserva los archivos fuente editables del icono cuando sea posible.
+
+Configura correctamente los recursos del launcher y verifica que no aparezca el icono genérico de Android Studio.
+
+---
+
+### 6. Pantalla de inicio con logotipo oficial
+
+Al abrir SimpleSoft Converter quiero ver el logotipo oficial de SimpleSoft durante la carga real de la aplicación.
+
+Requisitos:
+
+- Utilizar el logotipo original aprobado, sin rediseñarlo.
+- Fondo limpio, preferiblemente adaptado a tema claro y oscuro.
+- Logotipo centrado.
+- Transición natural hacia la pantalla principal.
+- Sin tiempos de espera artificiales.
+- Sin animaciones pesadas.
+- Compatible con Android 8.0 y versiones posteriores.
+
+Utiliza la API de SplashScreen compatible con Android cuando corresponda.
+
+Ten en cuenta las limitaciones del splash screen del sistema y diferencia claramente el icono de lanzamiento del logotipo completo. Si se necesita una pantalla adicional para mostrar el logotipo, que no retrase innecesariamente la apertura.
+
+---
+
+### 7. Reorganizar las categorías mediante pestañas
+
+La aplicación irá incorporando más conversiones. No quiero una lista interminable de categorías.
+
+Diseña una navegación sencilla mediante **familias de conversiones organizadas en pestañas**.
+
+Propuesta inicial:
+
+**Físicas**
+- Longitud
+- Masa
+- Temperatura
+- Volumen
+- Superficie
+- Velocidad
+- Presión
+
+**Técnicas**
+- Energía
+- Potencia
+- Tiempo
+- Almacenamiento digital
+
+**Cotidianas**
+- Tallas de calzado
+- Tallas de ropa
+- Cocina
+
+Las seis categorías existentes deben seguir funcionando.
+
+Implementa en esta versión la categoría de **Presión**, incluyendo al menos pascal, kilopascal, bar, milibar, atmósfera estándar, psi y mmHg convencional, con factores precisos y unidades bien definidas.
+
+Las demás categorías futuras deben quedar preparadas en la arquitectura, pero no deben aparecer como conversiones funcionales hasta estar implementadas. Evita botones sin función.
+
+La interfaz debe permitir:
+
+- Cambiar fácilmente entre familias mediante pestañas.
+- Seleccionar una categoría.
+- Acceder a la conversión sin ocupar excesivo espacio con la navegación.
+- Mantener accesibles favoritos y conversiones frecuentes.
+- Conservar la categoría y el par de unidades utilizados cuando corresponda.
+- Adaptarse a pantallas pequeñas.
+- Evitar desplazamientos horizontales incómodos.
+
+Si las pestañas no caben en el ancho disponible, utiliza una solución accesible, como pestañas desplazables.
+
+Prioriza claridad y facilidad de uso por encima de efectos visuales.
+
+---
+
+### 8. Preparar la arquitectura para futuras conversiones
+
+Separa claramente:
+
+- Definición de categorías.
+- Definición de unidades.
+- Factores y fórmulas de conversión.
+- Organización de categorías en familias.
+- Presentación visual.
+
+Las categorías nuevas deben poder añadirse sin reescribir la pantalla principal.
+
+Mantén la precisión numérica de la versión anterior.
+
+Ten especial cuidado con conversiones no lineales, como temperatura, y con futuras categorías de equivalencia aproximada, como tallas de ropa y calzado.
+
+No inventes equivalencias universales para tallas.
+
+---
+
+### 9. Calidad, compatibilidad y pruebas
+
+No elimines ni rompas las funcionalidades ya implementadas.
+
+Comprueba especialmente:
+
+- Conversiones de las seis categorías originales.
+- Nueva categoría de presión.
+- Intercambio de unidades.
+- Favoritos y su orden.
+- Frecuentes y estadísticas.
+- Persistencia después de cerrar la aplicación.
+- Temas claro y oscuro.
+- Lectura del archivo JSON.
+- Rotación de mensajes del banner.
+- Accesibilidad y reducción de movimiento.
+- Icono y pantalla de inicio.
+- Funcionamiento sin conexión.
+
+Añade pruebas unitarias para los componentes nuevos.
+
+Ejecuta, si el entorno lo permite:
+
+`gradlew assembleDebug`
+
+`gradlew testDebugUnitTest`
+
+No afirmes que una prueba ha pasado si no se ha ejecutado realmente.
+
+Mantén la compatibilidad con el proyecto Android Studio de Windows que ya tenemos.
+
+---
+
+### 10. Entregables
+
+Guarda los resultados en la carpeta principal SimpleSoft de Google Drive.
+
+Necesito:
+
+**A. Proyecto Android completo**
+
+`SimpleSoft-Converter-Android-004.zip`
+
+Debe incluir todo el código fuente, recursos, módulos Gradle, pruebas y documentación necesaria para abrirlo en Android Studio.
+
+**B. Documentación de cambios**
+
+`CAMBIOS_004.md`
+
+Explica qué se ha modificado, qué funcionalidades se han añadido y qué queda pendiente.
+
+**C. Documentación de SimpleSoft Core**
+
+`SIMPLESOFT_CORE.md`
+
+Explica cómo reutilizar la biblioteca, editar los mensajes y preparar nuevas aplicaciones.
+
+**D. Informe de verificación**
+
+`VERIFICACION_004.md`
+
+Incluye resultados reales de compilación y pruebas, limitaciones y problemas conocidos.
+
+**E. Instrucciones para Windows**
+
+`LEEME_WINDOWS_004.md`
+
+Explica cómo abrir, compilar e instalar esta versión sin sobrescribir la anterior.
+
+**F. Recursos gráficos**
+
+Conserva los recursos del icono y la pantalla de inicio dentro del proyecto, junto con sus fuentes editables si están disponibles.
+
+Si puedes generar una APK de depuración, inclúyela como archivo independiente.
+
+---
+
+### 11. Restricciones
+
+- No publicar en Google Play.
+- No realizar compras ni contratar servicios.
+- No integrar publicidad real todavía.
+- No incorporar analítica ni seguimiento.
+- No solicitar permisos innecesarios.
+- No modificar el logotipo oficial original.
+- No eliminar funcionalidades anteriores.
+- No añadir dependencias pesadas sin justificación.
+- No introducir conexiones a Internet para mensajes o anuncios.
+- No sobrescribir Android 003.
+
+Prioriza herramientas gratuitas y de código abierto.
+
+---
+
+### 12. Filosofía SimpleSoft
+
+Este proyecto nace como respuesta a las aplicaciones que abusan de la publicidad.
+
+Nuestro principio es:
+
+**SOFTWARE SHOULD HELP, NOT INTERRUPT.**
+
+Queremos demostrar que es posible crear aplicaciones útiles sin explotar la atención del usuario.
+
+Las aplicaciones SimpleSoft deben ser rápidas, sencillas, respetuosas con la privacidad y agradables de utilizar.
+
+La publicidad, si se incorpora en el futuro, será discreta y nunca interrumpirá una acción.
+
+La monetización es secundaria frente a la experiencia del usuario.
+
+---
+
+### 13. Resultado esperado
+
+Quiero recibir una versión 0.2.0 funcional de SimpleSoft Converter con:
+
+- Icono propio.
+- Splash screen con logotipo oficial.
+- Banner matricial verde con mensajes rotativos.
+- Sistema compartido SimpleSoft Core.
+- Archivo JSON independiente de mensajes.
+- Navegación mediante pestañas.
+- Nueva categoría de presión.
+- Arquitectura ampliable para nuevas conversiones.
+- Todas las funciones anteriores conservadas.
+
+**Trabaja directamente sobre los archivos disponibles, implementa los cambios y entrega el proyecto completo. No te limites a redactar una propuesta técnica.**
+
+Si alguna decisión de implementación es ambigua, utiliza la solución más sencilla, mantenible y coherente con la filosofía de SimpleSoft. Consulta antes de realizar cambios que alteren significativamente la identidad visual o el comportamiento aprobado.

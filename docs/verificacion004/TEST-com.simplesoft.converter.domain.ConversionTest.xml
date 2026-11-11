@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.simplesoft.converter.domain.ConversionTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2026-11-10T07:49:57.437Z" hostname="bec3f92d3d46" time="0.086">
+  <properties/>
+  <testcase name="ounceDefinition" classname="com.simplesoft.converter.domain.ConversionTest" time="0.02"/>
+  <testcase name="freezing" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="negativeTemperature" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <testcase name="speedDefinition" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <testcase name="absoluteZero" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <testcase name="inchDefinition" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="rankingDecay" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="differentGallons" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="incompatibleCategoriesRejected" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="poundDefinition" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="belowZeroRejected" classname="com.simplesoft.converter.domain.ConversionTest" time="0.002"/>
+  <testcase name="directionalPairs" classname="com.simplesoft.converter.domain.ConversionTest" time="0.018"/>
+  <testcase name="boiling" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="acres" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <testcase name="invalidInput" classname="com.simplesoft.converter.domain.ConversionTest" time="0.002"/>
+  <testcase name="roundingMarked" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="mileDefinition" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <testcase name="recentActivityBeatsStaleCount" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <testcase name="everyPairRoundTrip" classname="com.simplesoft.converter.domain.ConversionTest" time="0.03"/>
+  <testcase name="canonicalSwapDoesNotReparseRoundedText" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <testcase name="commaAndPartialInput" classname="com.simplesoft.converter.domain.ConversionTest" time="0.001"/>
+  <testcase name="squareFeet" classname="com.simplesoft.converter.domain.ConversionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

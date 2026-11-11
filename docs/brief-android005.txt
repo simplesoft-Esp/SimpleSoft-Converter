@@ -1,0 +1,400 @@
+# SimpleSoft Converter — Desarrollo Android 005
+## Versión 0.3.0 · Buscador, idiomas y widget interactivo
+
+### 1. Contexto
+
+Continuamos el desarrollo de **SimpleSoft Converter**, nuestra primera aplicación Android bajo la marca SimpleSoft.
+
+La versión anterior, Android 004 (v0.2.0), ya incorpora:
+
+- Siete categorías de conversión, incluida presión.
+- Favoritos y conversiones frecuentes.
+- Preferencias locales y temas claro/oscuro.
+- Icono personalizado y pantalla de inicio con el logotipo oficial.
+- Navegación por familias de categorías.
+- Biblioteca reutilizable `simplesoft-core`.
+- Banner retro verde con mensajes almacenados en JSON.
+
+Android 004 ha superado una compilación y 45 pruebas unitarias, según su informe de verificación.
+
+**Carpeta del proyecto:**
+https://drive.google.com/drive/folders/1vKjVg27bIXhKyQJVWoM-j42UWhde3BkJ
+
+Trabaja sobre la última versión Android 004 disponible en esa carpeta.
+
+No desarrolles una aplicación desde cero. Conserva la arquitectura, las funcionalidades y la identidad visual existentes.
+
+### 2. Objetivos de Android 005
+
+Implementar tres mejoras principales:
+
+1. Buscador de categorías y unidades.
+2. Localización automática español/inglés.
+3. Widget Android interactivo, denominado **SimpleSoft Converter Mini**.
+
+La versión resultante será **v0.3.0**.
+
+Mantener Kotlin, Jetpack Compose, Material 3, package `com.simplesoft.converter` y mínimo API 26.
+
+---
+
+## 3. Buscador de unidades
+
+Añadir un buscador integrado en la aplicación principal.
+
+Debe permitir buscar por:
+
+- Nombre de categoría.
+- Nombre completo de unidad.
+- Símbolo o abreviatura.
+- Nombres equivalentes y sinónimos relevantes.
+
+Ejemplos:
+
+- `psi` → presión.
+- `bar` → presión.
+- `km` → longitud.
+- `fahrenheit` → temperatura.
+- `litros` → volumen.
+- `millas` → longitud.
+
+### Comportamiento
+
+- Búsqueda instantánea mientras se escribe.
+- Sin necesidad de Internet.
+- Ignorar diferencias entre mayúsculas y minúsculas.
+- Permitir búsquedas sin tildes.
+- Mostrar resultados organizados y fáciles de seleccionar.
+- Al pulsar una unidad, abrir directamente su categoría y seleccionarla como unidad de origen.
+- Mantener accesibles los favoritos.
+- No introducir pantallas innecesarias.
+
+El buscador debe adaptarse al idioma activo.
+
+Utilizar las definiciones existentes de categorías y unidades como fuente de datos, evitando mantener catálogos duplicados.
+
+---
+
+## 4. Idiomas español e inglés
+
+La aplicación solamente tendrá dos idiomas oficiales:
+
+- Español (`es`).
+- Inglés (`en`).
+
+### Selección automática
+
+El idioma debe depender de la configuración del teléfono:
+
+| Idioma del teléfono | Idioma de SimpleSoft |
+|---|---|
+| Español | Español |
+| Inglés | Inglés |
+| Euskera | Inglés |
+| Francés | Inglés |
+| Alemán | Inglés |
+| Cualquier otro idioma | Inglés |
+
+**Inglés será el idioma predeterminado.**
+
+No utilizar servicios de traducción online ni añadir conexión a Internet.
+
+### Implementación
+
+Utilizar el sistema estándar de recursos Android:
+
+- `res/values/strings.xml` para inglés.
+- `res/values-es/strings.xml` para español.
+
+Localizar todos los textos visibles:
+
+- Categorías y nombres de unidades.
+- Botones y menús.
+- Favoritos y frecuentes.
+- Configuración.
+- Mensajes de error.
+- Accesibilidad.
+- Buscador.
+- Widget.
+- Notificaciones, si existen.
+- Mensajes del banner retro.
+
+Adaptar el JSON compartido de mensajes de SimpleSoft Core para disponer de versiones en inglés y español, conservando identificadores estables.
+
+Mantener sin traducir los símbolos científicos y las abreviaturas estandarizadas.
+
+Respetar el formato decimal adecuado para cada idioma.
+
+El cambio de idioma del sistema debe reflejarse correctamente en la aplicación y en el widget.
+
+No es necesario incorporar un selector manual de idioma en esta versión.
+
+---
+
+## 5. SimpleSoft Converter Mini — Widget Android
+
+Esta es la funcionalidad más importante de Android 005.
+
+Quiero un **widget completamente funcional desde la pantalla de inicio del teléfono**, sin tener que abrir la aplicación principal para realizar conversiones habituales.
+
+No quiero un simple acceso directo ni un widget que solamente muestre el último resultado.
+
+Debe funcionar como una minicalculadora especializada en conversiones de unidades.
+
+### 5.1. Diseño
+
+Distribución vertical:
+
+**Cabecera**
+- Nombre SimpleSoft Converter Mini.
+- Diseño compacto y reconocible.
+
+**Selector de categoría**
+- Un control desplegable para elegir longitud, masa, temperatura, volumen, superficie, velocidad, presión y las categorías futuras que estén implementadas.
+
+**Selectores de unidades**
+- Unidad de origen a la izquierda.
+- Botón de intercambio `⇄` en el centro.
+- Unidad de destino a la derecha.
+
+**Pantalla numérica**
+- Cantidad introducida.
+- Resultado de la conversión.
+- Símbolos de ambas unidades.
+
+**Teclado**
+- Dígitos del 0 al 9.
+- Separador decimal.
+- Botón `C` para borrar toda la cantidad.
+- Botón `⌫` para borrar el último dígito.
+- Botón `±` para introducir valores negativos.
+
+No incluir operaciones matemáticas como suma, resta, multiplicación o división.
+
+No incluir el botón `00`.
+
+El botón `⇄` debe situarse **entre los dos selectores de unidades**, no dentro del teclado numérico.
+
+### 5.2. Funcionamiento
+
+El usuario debe poder:
+
+1. Elegir la categoría.
+2. Seleccionar la unidad de origen.
+3. Seleccionar la unidad de destino.
+4. Introducir la cantidad utilizando el teclado del widget.
+5. Ver el resultado actualizado.
+6. Intercambiar las unidades.
+7. Cambiar de categoría sin abrir la aplicación.
+
+Al cambiar de categoría, los selectores deben mostrar únicamente las unidades pertenecientes a esa categoría.
+
+El widget debe recordar localmente la última categoría, unidades y cantidad utilizadas.
+
+El resultado debe calcularse utilizando el mismo motor de conversión de la aplicación principal, sin duplicar factores ni fórmulas.
+
+Mantener la precisión numérica, especialmente para temperatura y otras conversiones no lineales.
+
+### 5.3. Limitaciones técnicas de Android
+
+Los widgets Android no permiten utilizar directamente todos los controles de Jetpack Compose.
+
+Investiga e implementa una solución compatible mediante Jetpack Glance, RemoteViews u otras APIs oficiales apropiadas.
+
+Para el selector de categoría y los selectores de unidades, utiliza controles que funcionen realmente desde la pantalla de inicio.
+
+Si no es posible implementar un ComboBox convencional, utiliza listas compatibles, controles de selección o mecanismos equivalentes.
+
+**Requisito fundamental:** las conversiones y la entrada numérica deben funcionar directamente desde el widget, sin abrir la actividad principal.
+
+No simules interactividad mediante botones que simplemente abren la aplicación.
+
+Si una función no puede implementarse con las APIs disponibles, documenta claramente la limitación y la alternativa propuesta. No declares como implementado algo que no funciona realmente.
+
+### 5.4. Tamaños y diseño adaptable
+
+El widget debe ser redimensionable.
+
+Priorizar un tamaño suficientemente amplio para que el teclado numérico sea cómodo.
+
+En tamaños reducidos, adaptar la distribución sin cortar controles.
+
+Si un tamaño es demasiado pequeño para mostrar el teclado completo, establecer un tamaño mínimo razonable.
+
+Mantener coherencia visual con SimpleSoft:
+
+- Interfaz limpia.
+- Buena legibilidad.
+- Contraste adecuado.
+- Botones táctiles suficientemente grandes.
+- Compatible con tema claro y oscuro.
+- Estética discreta, con detalles verdes cuando corresponda.
+
+El banner publicitario retro no debe ocupar espacio que perjudique el funcionamiento del widget. Puede omitirse en el widget.
+
+### 5.5. Estado y rendimiento
+
+- Funcionamiento sin conexión.
+- Sin servicios permanentes en segundo plano.
+- Sin permisos innecesarios.
+- Sin consumo continuo de batería.
+- Actualización de resultados mediante las interacciones del usuario.
+- Estado independiente por instancia si se colocan varios widgets.
+- Restauración correcta después de reiniciar el teléfono.
+- Gestión correcta de widgets eliminados.
+- Compatible desde API 26.
+
+---
+
+## 6. Arquitectura reutilizable
+
+Mantener la filosofía de SimpleSoft Core.
+
+Reutilizar componentes y lógica cuando resulte apropiado, especialmente:
+
+- Definiciones de categorías.
+- Unidades.
+- Motor de conversiones.
+- Localización.
+- Preferencias.
+- Componentes de identidad visual.
+
+Si es necesario extraer el motor de conversiones a un módulo compartido para utilizarlo desde la aplicación y el widget, hazlo de manera limpia y documentada.
+
+No dupliques tablas de conversión.
+
+No introduzcas dependencias pesadas innecesariamente.
+
+---
+
+## 7. Pruebas
+
+Conservar todas las pruebas anteriores y añadir nuevas.
+
+### Buscador
+
+- Búsqueda por símbolo.
+- Búsqueda por nombre.
+- Mayúsculas/minúsculas.
+- Tildes.
+- Resultados vacíos.
+- Selección correcta de categoría y unidad.
+
+### Idiomas
+
+- Español.
+- Inglés.
+- Idioma no soportado con fallback inglés.
+- Textos completos.
+- Separadores decimales.
+- Cambio de idioma del sistema.
+
+### Widget
+
+- Introducción de números.
+- Decimales.
+- Valores negativos.
+- Borrado completo y retroceso.
+- Cambio de categoría.
+- Cambio de unidades.
+- Intercambio de unidades.
+- Conversión correcta.
+- Persistencia del estado.
+- Varias instancias.
+- Compatibilidad con distintos tamaños.
+
+Las pruebas unitarias no sustituyen la comprobación del widget en un dispositivo o emulador.
+
+Si puedes ejecutar pruebas instrumentadas, hazlo. En caso contrario, deja instrucciones detalladas para verificarlas manualmente.
+
+Ejecutar, cuando el entorno lo permita:
+
+`gradlew assembleDebug`
+
+`gradlew testDebugUnitTest`
+
+No afirmar que se han superado pruebas que no se hayan ejecutado.
+
+---
+
+## 8. Entregables
+
+Guardar los archivos en la carpeta principal de SimpleSoft en Google Drive.
+
+**A. Proyecto Android completo**
+
+`SimpleSoft-Converter-Android-005.zip`
+
+Debe contener todo el proyecto necesario para abrirlo y compilarlo en Android Studio.
+
+**B. Registro de cambios**
+
+`CAMBIOS_005.md`
+
+**C. Informe de verificación**
+
+`VERIFICACION_005.md`
+
+**D. Documentación del widget**
+
+`WIDGET_005.md`
+
+Explicar arquitectura, funcionamiento, limitaciones y pruebas manuales.
+
+**E. Instrucciones para Windows**
+
+`LEEME_WINDOWS_005.md`
+
+Indicar cómo compilar la nueva versión conservando la firma de depuración utilizada en Android 003 y 004.
+
+Si generas una APK de depuración, puedes incluirla como archivo adicional, pero recuerda que para actualizar nuestra instalación actual sin perder datos compilaremos el proyecto en el mismo ordenador Windows.
+
+No sobrescribir Android 004 ni eliminar los archivos anteriores.
+
+---
+
+## 9. Restricciones
+
+- No publicar en Google Play.
+- No realizar compras.
+- No integrar publicidad real.
+- No añadir seguimiento ni analítica.
+- No introducir permisos de Internet.
+- No modificar el logotipo oficial.
+- No eliminar funcionalidades existentes.
+- No añadir conversiones nuevas fuera del alcance de esta versión.
+- No introducir pantallas innecesarias.
+- No convertir el widget en una simple puerta de entrada a la aplicación.
+
+---
+
+## 10. Filosofía SimpleSoft
+
+**SOFTWARE SHOULD HELP, NOT INTERRUPT.**
+
+SimpleSoft desarrolla aplicaciones sencillas, rápidas, útiles y respetuosas con el usuario.
+
+Queremos demostrar que una aplicación no necesita publicidad invasiva, suscripciones absurdas ni funciones artificiales para resultar útil.
+
+Prioriza siempre la experiencia del usuario, la privacidad, el funcionamiento sin conexión y el mantenimiento sencillo.
+
+---
+
+## 11. Resultado esperado
+
+Entregar SimpleSoft Converter v0.3.0 con:
+
+- Buscador funcional de categorías y unidades.
+- Interfaz completa en español e inglés.
+- Detección automática del idioma del móvil.
+- Inglés como idioma predeterminado para idiomas no soportados.
+- Widget interactivo con teclado numérico.
+- Selector de categoría dentro del widget.
+- Selectores de unidades e intercambio.
+- Conversiones directamente desde la pantalla de inicio.
+- Persistencia de preferencias.
+- Todas las funciones de Android 004 conservadas.
+
+**Implementa el proyecto completo. No te limites a redactar especificaciones o ejemplos de código.**
+
+Antes de finalizar, verifica especialmente que el widget pueda utilizarse realmente sin abrir la aplicación principal y documenta cualquier limitación que no hayas podido resolver.

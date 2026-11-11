@@ -1,0 +1,79 @@
+﻿SimpleSoft Converter
+Especificaciones 001 · Revisión 002 · 10 de noviembre de 2026 · Base aprobada; prototipo pendiente de revisión
+1. Alcance y estado
+Objetivo: un conversor Android pequeño, rápido y sin cuenta, que facilite repetir las conversiones habituales. Este documento define el producto y la propuesta técnica; no constituye autorización para programar, integrar publicidad o publicar.
+Confirmado por el usuario: Kotlin y Jetpack Compose; seis categorías; favoritos manuales separados de frecuentes; preferencias locales; funcionamiento sin conexión; modos claro y oscuro. El resto de decisiones de este documento son propuestas revisables.
+2. Identidad visual
+Referencia comprobada: la carpeta SimpleSoft contiene SimpleSoft-logo.png, un monograma negro de dos eses entrelazadas sobre fondo blanco. No se ha modificado el original. Archivo: https://drive.google.com/file/d/1E4C7nuw557T2WaNy7JJFL__ivmLlCavc/view
+Propuesta: identidad monocroma, espacios amplios, curvas moderadas y jerarquía tipográfica clara. Evitar degradados, sombras decorativas y animaciones continuas. El logotipo identifica la marca; no debe competir con el resultado.
+Paleta clara: fondo #FAFAFA, superficie #FFFFFF, texto y acción principal #171717, texto secundario #595959, borde #D6D6D6. Paleta oscura: fondo #121212, superficie #1E1E1E, texto #F5F5F5, secundario #B8B8B8, borde #454545. Estado de error: texto e icono explícitos; nunca depender solo del color.
+Tipografía: fuente del sistema Android, números de resultado grandes (32 sp), entrada 28 sp, cuerpo 16 sp y etiquetas 14 sp. Espaciado base 8 dp, margen lateral 20 dp, esquinas 16 dp y objetivos táctiles de al menos 48 dp. Respetar tamaño de fuente del sistema y TalkBack.
+El PNG tiene un fondo blanco visible: conservarlo íntegro y mostrarlo sobre superficie blanca también en modo oscuro, preferentemente en Acerca de. No recortarlo, invertirlo ni convertirlo en icono adaptativo sin aprobación. La cabecera principal puede ser textual para evitar que el margen interno del PNG reduzca su legibilidad.
+3. Pantalla principal
+Orden vertical propuesto:
+Cabecera: Converter, con acceso a Ajustes; marca SimpleSoft discreta.
+Categoría: selector compacto con nombre e icono; abre una hoja inferior con las seis categorías. Evita una fila horizontal que oculte categorías.
+Tarjeta de conversión: campo «De» con valor editable y selector de unidad; botón «Intercambiar unidades»; bloque «A» con resultado y selector de unidad; acciones Copiar y estrella para fijar el par. Ejemplo: Longitud / 10 pies / Intercambiar / 3,048 metros.
+Favoritos: accesos con etiquetas como «pies → metros» y estrella llena; orden exclusivamente manual. Mostrar tres inicialmente y «Ver todos» si hay más.
+Frecuentes: hasta tres accesos sugeridos, identificados como automáticos; excluir los pares ya fijados. No reordenar mientras se escribe.
+Espacio inferior: reservado conceptualmente para publicidad futura, separado de los controles. En esta fase no habrá SDK, anuncios ni franja vacía obligatoria. Cuando exista publicidad no deberá cubrir resultados ni teclado; su comportamiento se revisará por separado.
+Con teclado abierto, priorizar entrada y resultado; favoritos y frecuentes pueden quedar fuera del área visible mediante desplazamiento. Sin navegación inferior: una pantalla principal, hojas de selección y una pantalla secundaria de Ajustes.
+4. Interacciones y estados
+Conversión en cada edición válida, sin botón Calcular. Aceptar coma o punto como separador decimal; no admitir agrupadores de miles en la entrada inicial. Una entrada con ambos separadores o varios separadores muestra una indicación breve y no un resultado engañoso. Mantener el texto original mientras se edita. Campo vacío, signo aislado o separador aislado: resultado «—», sin error agresivo.
+Permitir negativos cuando tengan sentido matemático, incluida temperatura; rechazar temperaturas por debajo del cero absoluto. No admitir NaN ni infinito. Si se excede la capacidad numérica, mostrar «Valor fuera de rango».
+Intercambiar cambia origen y destino y traslada el resultado a la entrada usando el valor interno sin redondear a las cifras de presentación. Mantener ese valor hasta una edición explícita; no analizar de nuevo el texto redondeado. Si no hay resultado válido, desactivar el intercambio. Seleccionar un favorito conserva el valor actual y cambia categoría/unidades. Al cambiar de categoría, restaurar su último par y mantener el valor si sigue siendo válido.
+Propuesta de salida: hasta 10 cifras significativas, sin ceros finales innecesarios, coma decimal en español y notación científica en extremos. Copiar usa el número mostrado con su unidad. Indicar aproximación cuando el formato redondee. El cálculo utiliza mayor precisión que la presentación; no encadenar resultados previamente redondeados.
+Primer inicio: Longitud, metros → pies, campo vacío. No precargar supuestas preferencias personales. Después, restaurar categoría y par globales más recientes. Guardar la entrada solo durante recreación de pantalla; al abrir un proceso nuevo, dejarla vacía para no persistir valores personales innecesarios.
+5. Favoritos, uso e historial
+Identidad de un acceso: categoría + unidad de origen + unidad de destino. La dirección importa: pies → metros y metros → pies son pares distintos. No permitir duplicados exactos.
+Favoritos: añadir o quitar con la estrella; renombrado fuera del alcance inicial. Orden manual mediante acciones accesibles Subir/Bajar en «Editar favoritos»; arrastre opcional posterior. Nunca se reordenan por uso. Quitar una estrella no elimina sus estadísticas y puede hacer reaparecer el par en Frecuentes.
+Registro local: guardar únicamente el identificador del par, contador de usos confirmados y última fecha de uso. No guardar valores introducidos ni resultados, ni enviar telemetría. «Historial de uso» significa pares recientes, no una lista de cálculos numéricos.
+Un uso es una operación de edición con resultado válido finalizada al cambiar de par/categoría, copiar el resultado, cerrar el teclado mediante Hecho o pasar la app a segundo plano. Confirmar como máximo una vez por operación; nuevas ediciones inician otra operación. Restaurar la pantalla, rotarla, tocar una estrella o pulsar un acceso sin introducir un valor no suma usos. No contar cada dígito. Persistir en una transacción para evitar contadores duplicados.
+Frecuentes: combinar frecuencia y recencia mediante un contador con decaimiento exponencial, semivida propuesta de 14 días. En cada uso confirmado: puntuación nueva = puntuación previa × 2^(−días transcurridos/14) + 1. Para ordenar, evaluar todas las puntuaciones a la fecha actual; desempatar por último uso e identificador estable. Conservar contador histórico solo como estadística; no determina el orden. Excluir favoritos y mostrar hasta tres pares. Recalcular al abrir o confirmar un uso, sin reordenar mientras se escribe. Sin datos, ocultar el bloque o mostrar explicación. Semivida de 14 días es un parámetro propuesto para validar, no una preferencia expresamente aprobada.
+Recientes: acceso secundario desde Ajustes, hasta 20 pares por última utilización, sin valores. No añadir un tercer bloque permanente a la pantalla principal.
+Privacidad: controles separados para borrar estadísticas/recientes, vaciar favoritos y restablecer preferencias; confirmar los borrados. Borrar estadísticas conserva favoritos y última selección. Desactivar aprendizaje deja de registrar usos y oculta Frecuentes, sin borrar lo anterior hasta una acción explícita. No hay cuenta, analítica ni sincronización. Propuesta: excluir preferencias y uso de copias automáticas en nube; confirmar si se desea permitir transferencia entre dispositivos.
+6. Catálogo y motor
+Longitud: mm, cm, m, km, pulgadas, pies, yardas y millas internacionales.
+Masa: mg, g, kg, toneladas métricas, onzas avoirdupois y libras avoirdupois.
+Temperatura: °C, °F y K, con transformaciones afines y validación de cero absoluto.
+Volumen: mL, L, m³, galón líquido estadounidense y galón imperial, siempre etiquetados US/imperial. Excluir «taza» y «onza líquida» inicialmente para evitar convenciones ambiguas.
+Superficie: cm², m², km², hectáreas, pies² y acres internacionales.
+Velocidad: m/s, km/h, mph y nudos.
+Usar identificadores estables y una unidad base por categoría. Factores exactos de definiciones reconocidas; documentar procedencia antes de implementar. Propuesta: BigDecimal con MathContext DECIMAL128, constantes decimales exactas y cocientes calculados con precisión controlada. Separar formato, análisis de entrada y cálculo. La app será una herramienta cotidiana, sin prometer precisión científica ilimitada.
+7. Arquitectura Android
+Propuesta: una Activity y Compose con Material 3; flujo unidireccional de estado, ConverterViewModel y StateFlow. La UI presenta estado y emite eventos; el ViewModel coordina conversión y persistencia, sin cálculos ni acceso a almacenamiento dentro de los componentes visuales.
+Un único módulo Gradle :app inicialmente, organizado en paquetes ui/theme, ui/components, feature/converter, domain/conversion y data/local. Extraer módulos compartidos cuando una segunda aplicación tenga una necesidad real; evitar una plataforma genérica prematura.
+Motor de conversión Kotlin puro y determinista; repositorio local con interfaz pequeña. Preferences DataStore para tema, aprendizaje y última selección. Room para favoritos ordenados y estadísticas por par, con operaciones atómicas y migraciones explícitas. La base es pequeña, pero requiere consultas, claves únicas y actualizaciones parciales; no mantener un log ilimitado de eventos.
+Inyección manual mediante un contenedor de aplicación; no introducir Hilt, red, tareas periódicas ni servicios. Coroutines para almacenamiento fuera del hilo principal. Sin permiso de Internet en esta primera versión.
+Reutilizables previstos: SimpleSoftTheme, estilos de campo numérico, selector en hoja inferior, filas de preferencias, confirmaciones y estados vacíos. La publicidad futura tendrá un límite de integración separado y no será una dependencia del motor.
+Drive es la ubicación principal de documentos y entregables. Para código futuro, proponer Git local con copias versionadas en Drive; no trabajar sobre archivos de Android Studio sincronizados simultáneamente por varios equipos. Un remoto Git sería una decisión posterior que requiere autorización; no se ha creado.
+8. Validación antes de considerar terminada la primera versión
+Cálculo: comprobar factores contra referencias, ida y vuelta con tolerancias definidas, temperaturas de referencia, cero absoluto y ambigüedad US/imperial.
+Entrada: verificar coma y punto, pegado, negativos, entrada parcial, números grandes, redondeo y división no terminante.
+Persistencia: conservar favoritos y orden tras reiniciar; restaurar par; registrar exactamente un uso por operación; excluir favoritos de frecuentes y respetar borrados/aprendizaje desactivado.
+UX: acceder a un favorito en un toque; convertir sin red; conservar el borrador al rotar; usar texto grande, TalkBack, teclado abierto y ambos temas sin controles ocultos. La pantalla debe mostrarse sin esperar almacenamiento o conexión, usando estado inicial y actualización local.
+Plan estimado, sujeto a aprobación y entorno: 1–2 semanas de trabajo para la primera versión con pruebas básicas. No incluye publicación, aprendizaje de herramientas ni publicidad. No se han fijado versiones de dependencias: se comprobará la compatibilidad estable en el inicio del desarrollo.
+9. Decisiones para revisión
+D1 · Aprobar identidad monocroma y uso íntegro del logo sobre blanco; cualquier variante oscura o icono adaptativo requiere aprobación específica.
+D2 · Aprobar jerarquía: conversor primero, favoritos manuales después y frecuentes automáticos al final.
+D3 · Aprobado con ajuste: intercambio trasladando resultado interno a entrada; conservar pares direccionales. No persistir valores entre procesos.
+D4 · Ajuste requerido: ranking por frecuencia y recencia. Propuesta concreta: decaimiento con semivida de 14 días; validar con el prototipo. Mantener recientes limitados y sin historial numérico.
+D5 · Aprobar catálogo inicial y formato de 10 cifras significativas.
+D6 · Propuesta de compatibilidad: Android 8.0/API 26 como mínimo; idioma español inicialmente, recursos preparados para traducción. Target/compile SDK y versiones se elegirán según requisitos vigentes al desarrollar.
+D7 · Aprobar un módulo, inyección manual, DataStore + Room y BigDecimal. Confirmar disponibilidad de Android Studio y móvil físico para pruebas al comenzar.
+D8 · Confirmar política de copias del sistema y estrategia Git local/copias en Drive. Identificador definitivo de paquete y nombre del editor deben fijarse antes de una publicación futura.
+D9 · Publicidad aplazada: red, consentimiento, datos y diseño del banner se revisarán en otra fase; no se crea servicio ni se integra SDK ahora.
+Siguiente paso autorizado: prototipo funcional de interfaz con una categoría, favoritos simulados y modos claro y oscuro. El desarrollo Android completo y la publicidad siguen fuera de alcance.
+10. Referencias y trazabilidad
+Carpeta principal facilitada por el usuario: https://drive.google.com/drive/folders/1vKjVg27bIXhKyQJVWoM-j42UWhde3BkJ
+Logotipo observado: SimpleSoft-logo.png, ID 1E4C7nuw557T2WaNy7JJFL__ivmLlCavc; imagen de 1254 × 1254 px, según vista descargada. El original se conserva sin cambios.
+Guía oficial Android de recomendaciones de arquitectura: https://developer.android.com/topic/architecture/recommendations
+Guía oficial de diseño offline-first: https://developer.android.com/topic/architecture/data-layer/offline-first
+Las referencias respaldan separación de capas y estado local; las selecciones de componentes, reglas UX, paleta, ranking y plazos son propuestas específicas de SimpleSoft, no requisitos impuestos por esas guías.
+
+
+11. Revisión 002 y alcance del prototipo
+El 10 de noviembre de 2026 el usuario aprueba identidad monocroma, estructura general, seis categorías y arquitectura. Solicita intercambio con resultado interno, frecuentes sensibles al uso reciente y revisar un prototipo antes de desarrollar la aplicación completa. Las decisiones no expresamente aprobadas siguen siendo propuestas.
+Prototipo de navegador autocontenido, sin publicación ni servicios: categoría Longitud, entrada con coma/punto, selección de unidades, cálculo real, intercambio sin reutilizar el texto redondeado, copiar, favoritos editables durante la sesión y temas claro/oscuro. Para preservar precisión en longitud se propone aritmética racional con enteros BigInt en el prototipo; no es el motor Android definitivo.
+Simulado: favoritos iniciales de ejemplo, datos de uso sintéticos y paso de días mediante control de demostración. Las preferencias y cambios se pierden al recargar. No integra Room/DataStore, APK, las otras cinco categorías, anuncios ni SDK. El ranking aplica la fórmula propuesta a datos de ejemplo y permite registrar un uso manualmente para inspeccionar el orden; no implementa el ciclo Android de confirmación automática.
+Prueba: descargar SimpleSoft-Converter-prototipo-002.html desde Drive y abrir con Chrome, Edge o Firefox. Funciona sin conexión una vez descargado. Probar 1 m → pies e intercambiar dos veces: debe volver a 1 m aunque la salida intermedia esté redondeada. Probar 2,5 km → m; cambiar tema; fijar/quitar favorito; registrar uso y avanzar días. El prototipo es para revisión UX; no supone aprobación de implementación completa.

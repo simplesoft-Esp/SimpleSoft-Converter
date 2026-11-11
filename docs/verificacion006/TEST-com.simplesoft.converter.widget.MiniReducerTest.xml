@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.simplesoft.converter.widget.MiniReducerTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-11-10T10:16:06.855Z" hostname="d9c45714e066" time="0.084">
+  <properties/>
+  <testcase name="clearAndErase" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.048"/>
+  <testcase name="pressureUsesSharedEngine" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.0"/>
+  <testcase name="unsupportedCommandsDoNothing" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.001"/>
+  <testcase name="remembersPairsPerCategory" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.002"/>
+  <testcase name="negativeAndSignToggle" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.0"/>
+  <testcase name="changesCategoryAndLimitsUnitChoices" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.001"/>
+  <testcase name="temperatureValidation" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.0"/>
+  <testcase name="persistenceIncludesNumberAndCanonicalBase" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.008"/>
+  <testcase name="digitsAndDecimal" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.0"/>
+  <testcase name="separateInstancesAndDeletion" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.006"/>
+  <testcase name="emptyDecimalAndNegativeDecimal" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.0"/>
+  <testcase name="selectorsPaginateInsideWidget" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.001"/>
+  <testcase name="exactSwapsSurviveStorageRoundTrip" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.015"/>
+  <testcase name="sizesRespectMinimum" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.0"/>
+  <testcase name="invalidStorageIsSafe" classname="com.simplesoft.converter.widget.MiniReducerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
